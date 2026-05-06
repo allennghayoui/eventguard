@@ -9,10 +9,12 @@ import com.allennghayoui.eventguard.usecase.port.ILogParser;
 public class IngestLogLine {
     private final ILogParser parser;
     private final ILogEventRepository repository;
+    private final EvaluateRulesForEvent evaluateRules;
 
-    public IngestLogLine(ILogParser parser, ILogEventRepository repository) {
+    public IngestLogLine(ILogParser parser, ILogEventRepository repository, EvaluateRulesForEvent evaluateRules) {
         this.parser = Objects.requireNonNull(parser, "parser");
         this.repository = Objects.requireNonNull(repository, "repository");
+        this.evaluateRules = Objects.requireNonNull(evaluateRules, "evaluateRules");
     }
 
     public LogEvent execute(String rawLine, String source) {
@@ -29,6 +31,7 @@ public class IngestLogLine {
 
         LogEvent event = parser.parse(rawLine, source);
         repository.save(event);
+        evaluateRules.execute(event);
         return event;
     }
 }
