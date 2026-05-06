@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class AlertTest {
     @Test
     void raiseCopiesNameAndSeverityFromRule() {
-        Rule rule = new Rule() {
+        IRule rule = new IRule() {
             @Override public String name() { return "ssh-bruteforce"; }
             @Override public Severity severity() { return Severity.CRITICAL; }
             @Override public boolean matches(LogEvent event) { return true; }
