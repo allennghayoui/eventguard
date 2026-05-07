@@ -4,12 +4,9 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.stereotype.Component;
-
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
 
-@Component
 public class SearchLogEvents {
     private final LogEventRepository repository;
 

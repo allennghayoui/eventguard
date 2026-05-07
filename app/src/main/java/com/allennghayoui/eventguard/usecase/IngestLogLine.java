@@ -2,13 +2,10 @@ package com.allennghayoui.eventguard.usecase;
 
 import java.util.Objects;
 
-import org.springframework.stereotype.Component;
-
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
 import com.allennghayoui.eventguard.usecase.port.LogParser;
 
-@Component
 public class IngestLogLine {
     private final LogParser parser;
     private final LogEventRepository repository;

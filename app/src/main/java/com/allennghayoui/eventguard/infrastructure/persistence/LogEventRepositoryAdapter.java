@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
@@ -14,6 +15,7 @@ import com.allennghayoui.eventguard.infrastructure.persistence.jpa.LogEventJpaRe
 import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
 
 @Repository
+@Profile("!dev")
 public class LogEventRepositoryAdapter implements LogEventRepository {
     private final LogEventJpaRepository jpa;
 

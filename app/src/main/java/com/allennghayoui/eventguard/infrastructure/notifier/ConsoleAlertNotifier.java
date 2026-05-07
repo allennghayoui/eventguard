@@ -1,11 +1,8 @@
 package com.allennghayoui.eventguard.infrastructure.notifier;
 
-import org.springframework.stereotype.Component;
-
 import com.allennghayoui.eventguard.domain.Alert;
 import com.allennghayoui.eventguard.usecase.port.AlertNotifier;
 
-@Component
 public class ConsoleAlertNotifier implements AlertNotifier {
     
     @Override

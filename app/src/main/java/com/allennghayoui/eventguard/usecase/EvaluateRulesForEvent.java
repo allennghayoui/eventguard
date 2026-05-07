@@ -3,8 +3,6 @@ package com.allennghayoui.eventguard.usecase;
 import java.util.List;
 import java.util.Objects;
 
-import org.springframework.stereotype.Component;
-
 import com.allennghayoui.eventguard.domain.Alert;
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Rule;
@@ -12,7 +10,6 @@ import com.allennghayoui.eventguard.usecase.port.AlertNotifier;
 import com.allennghayoui.eventguard.usecase.port.AlertRepository;
 import com.allennghayoui.eventguard.usecase.port.Clock;
 
-@Component
 public class EvaluateRulesForEvent {
     private final List<Rule> rules;
     private final AlertRepository alertRepository;
