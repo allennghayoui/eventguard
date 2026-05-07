@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.allennghayoui.eventguard.domain.Alert;
-import com.allennghayoui.eventguard.usecase.port.IAlertNotifier;
+import com.allennghayoui.eventguard.usecase.port.AlertNotifier;
 
-public class CapturingAlertNotifier implements IAlertNotifier {
+public class CapturingAlertNotifier implements AlertNotifier {
     private final List<Alert> notified = new ArrayList<>();
 
     @Override public void notify(Alert alert) { notified.add(alert); }

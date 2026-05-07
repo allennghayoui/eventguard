@@ -12,7 +12,7 @@ import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
 import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryAlertRepository;
 import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryLogEventRepository;
-import com.allennghayoui.eventguard.usecase.port.ILogParser;
+import com.allennghayoui.eventguard.usecase.port.LogParser;
 import com.allennghayoui.eventguard.usecase.rule.SshBruteForceRule;
 
 public class IngestLogLineTest {
@@ -70,7 +70,7 @@ public class IngestLogLineTest {
             new FixedClock(Instant.parse("2025-01-01T00:00:00Z"))
         );
         
-        ILogParser matchingParser = (line, source) -> LogEvent.create(
+        LogParser matchingParser = (line, source) -> LogEvent.create(
             Instant.parse("2025-01-01T00:00:00Z"),
             source,
             Severity.WARNING,

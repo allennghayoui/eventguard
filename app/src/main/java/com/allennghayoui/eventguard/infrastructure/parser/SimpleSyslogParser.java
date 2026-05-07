@@ -10,11 +10,14 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
-import com.allennghayoui.eventguard.usecase.port.ILogParser;
+import com.allennghayoui.eventguard.usecase.port.LogParser;
 
-public class SimpleSyslogParser implements ILogParser {
+@Component
+public class SimpleSyslogParser implements LogParser {
     
     // Matches: Jan 5 12:34:56 hostname process[pid]: message
     // Or:      Jan 5 12:34:56 hostname process: message

@@ -2,16 +2,19 @@ package com.allennghayoui.eventguard.usecase;
 
 import java.util.Objects;
 
-import com.allennghayoui.eventguard.domain.LogEvent;
-import com.allennghayoui.eventguard.usecase.port.ILogEventRepository;
-import com.allennghayoui.eventguard.usecase.port.ILogParser;
+import org.springframework.stereotype.Component;
 
+import com.allennghayoui.eventguard.domain.LogEvent;
+import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
+import com.allennghayoui.eventguard.usecase.port.LogParser;
+
+@Component
 public class IngestLogLine {
-    private final ILogParser parser;
-    private final ILogEventRepository repository;
+    private final LogParser parser;
+    private final LogEventRepository repository;
     private final EvaluateRulesForEvent evaluateRules;
 
-    public IngestLogLine(ILogParser parser, ILogEventRepository repository, EvaluateRulesForEvent evaluateRules) {
+    public IngestLogLine(LogParser parser, LogEventRepository repository, EvaluateRulesForEvent evaluateRules) {
         this.parser = Objects.requireNonNull(parser, "parser");
         this.repository = Objects.requireNonNull(repository, "repository");
         this.evaluateRules = Objects.requireNonNull(evaluateRules, "evaluateRules");

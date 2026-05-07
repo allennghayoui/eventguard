@@ -20,7 +20,7 @@ public final class Alert {
         this.raisedAt = Objects.requireNonNull(raisedAt, "raisedAt");
     }
 
-    public static Alert raise(IRule rule, LogEvent event, Instant now) {
+    public static Alert raise(Rule rule, LogEvent event, Instant now) {
         return new Alert(UUID.randomUUID(), rule.name(), event.id(), rule.severity(), now);
     }
 

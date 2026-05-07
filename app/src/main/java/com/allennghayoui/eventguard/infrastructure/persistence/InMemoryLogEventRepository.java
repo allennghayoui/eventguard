@@ -8,9 +8,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
-import com.allennghayoui.eventguard.usecase.port.ILogEventRepository;
+import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
 
-public class InMemoryLogEventRepository implements ILogEventRepository {
+public class InMemoryLogEventRepository implements LogEventRepository {
     private final Map<UUID, LogEvent> store = new HashMap<>();
 
     @Override

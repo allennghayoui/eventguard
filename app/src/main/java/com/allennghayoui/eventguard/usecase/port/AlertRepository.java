@@ -6,7 +6,7 @@ import java.util.UUID;
 
 import com.allennghayoui.eventguard.domain.Alert;
 
-public interface IAlertRepository {
+public interface AlertRepository {
     void save(Alert alert);
     Optional<Alert> findById(UUID id);
     List<Alert> findAll();

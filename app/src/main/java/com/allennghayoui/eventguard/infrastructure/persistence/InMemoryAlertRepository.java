@@ -8,9 +8,9 @@ import java.util.Optional;
 import java.util.UUID;
 
 import com.allennghayoui.eventguard.domain.Alert;
-import com.allennghayoui.eventguard.usecase.port.IAlertRepository;
+import com.allennghayoui.eventguard.usecase.port.AlertRepository;
 
-public class InMemoryAlertRepository implements IAlertRepository{
+public class InMemoryAlertRepository implements AlertRepository{
     private final Map<UUID, Alert> store = new HashMap<>();
 
     @Override public void save(Alert alert) { store.put(alert.id(), alert); }

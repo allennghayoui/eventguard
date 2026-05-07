@@ -5,9 +5,9 @@ import java.util.Map;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
-import com.allennghayoui.eventguard.usecase.port.ILogParser;
+import com.allennghayoui.eventguard.usecase.port.LogParser;
 
-public class StubLogParser implements ILogParser {
+public class StubLogParser implements LogParser {
     
     @Override
     public LogEvent parse(String rawLine, String source) {

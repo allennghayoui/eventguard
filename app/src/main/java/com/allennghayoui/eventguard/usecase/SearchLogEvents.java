@@ -4,13 +4,16 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
 import com.allennghayoui.eventguard.domain.LogEvent;
-import com.allennghayoui.eventguard.usecase.port.ILogEventRepository;
+import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
 
+@Component
 public class SearchLogEvents {
-    private final ILogEventRepository repository;
+    private final LogEventRepository repository;
 
-    public SearchLogEvents(ILogEventRepository repository) {
+    public SearchLogEvents(LogEventRepository repository) {
         this.repository = Objects.requireNonNull(repository, "repository");
     }
 

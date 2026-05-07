@@ -7,7 +7,7 @@ import java.util.UUID;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
 
-public interface ILogEventRepository {
+public interface LogEventRepository {
     void save(LogEvent event);
     Optional<LogEvent> findById(UUID id);
     List<LogEvent> findBySource(String source);

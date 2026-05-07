@@ -3,20 +3,23 @@ package com.allennghayoui.eventguard.usecase;
 import java.util.List;
 import java.util.Objects;
 
+import org.springframework.stereotype.Component;
+
 import com.allennghayoui.eventguard.domain.Alert;
-import com.allennghayoui.eventguard.domain.IRule;
 import com.allennghayoui.eventguard.domain.LogEvent;
-import com.allennghayoui.eventguard.usecase.port.IAlertNotifier;
-import com.allennghayoui.eventguard.usecase.port.IAlertRepository;
-import com.allennghayoui.eventguard.usecase.port.IClock;
+import com.allennghayoui.eventguard.domain.Rule;
+import com.allennghayoui.eventguard.usecase.port.AlertNotifier;
+import com.allennghayoui.eventguard.usecase.port.AlertRepository;
+import com.allennghayoui.eventguard.usecase.port.Clock;
 
+@Component
 public class EvaluateRulesForEvent {
-    private final List<IRule> rules;
-    private final IAlertRepository alertRepository;
-    private final IAlertNotifier alertNotifier;
-    private final IClock clock;
+    private final List<Rule> rules;
+    private final AlertRepository alertRepository;
+    private final AlertNotifier alertNotifier;
+    private final Clock clock;
 
-    public EvaluateRulesForEvent(List<IRule> rules, IAlertRepository alertRepository, IAlertNotifier alertNotifier, IClock clock) {
+    public EvaluateRulesForEvent(List<Rule> rules, AlertRepository alertRepository, AlertNotifier alertNotifier, Clock clock) {
         this.rules = List.copyOf(Objects.requireNonNull(rules, "rules"));
         this.alertRepository = Objects.requireNonNull(alertRepository, "alertRepository");
         this.alertNotifier = Objects.requireNonNull(alertNotifier, "alertNotifier");
