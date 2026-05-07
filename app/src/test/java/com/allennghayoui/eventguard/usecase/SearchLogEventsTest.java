@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
+import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryLogEventRepository;
 
 public class SearchLogEventsTest {
     @Test

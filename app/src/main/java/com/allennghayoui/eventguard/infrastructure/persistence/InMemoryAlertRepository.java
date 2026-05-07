@@ -1,4 +1,4 @@
-package com.allennghayoui.eventguard.usecase;
+package com.allennghayoui.eventguard.infrastructure.persistence;
 
 import java.util.ArrayList;
 import java.util.HashMap;

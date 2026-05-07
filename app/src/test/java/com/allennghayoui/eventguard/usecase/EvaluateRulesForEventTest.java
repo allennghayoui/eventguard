@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import com.allennghayoui.eventguard.domain.Alert;
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
+import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryAlertRepository;
 import com.allennghayoui.eventguard.usecase.rule.SshBruteForceRule;
 
 public class EvaluateRulesForEventTest {
