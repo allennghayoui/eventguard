@@ -14,6 +14,7 @@ import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryAlertRepo
 import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryLogEventRepository;
 import com.allennghayoui.eventguard.usecase.EvaluateRulesForEvent;
 import com.allennghayoui.eventguard.usecase.IngestLogLine;
+import com.allennghayoui.eventguard.usecase.ListAlerts;
 import com.allennghayoui.eventguard.usecase.SearchLogEvents;
 import com.allennghayoui.eventguard.usecase.port.AlertNotifier;
 import com.allennghayoui.eventguard.usecase.port.AlertRepository;
@@ -75,6 +76,12 @@ public class Wiring {
         return new SearchLogEvents(logEventRepository);
     }
 
+    @Bean
+    public ListAlerts listAlerts(AlertRepository alertRepository) {
+        return new ListAlerts(alertRepository);
+    }
+
+    // In-Memory persistence
     @Bean
     @Profile("dev")
     public LogEventRepository inMemoryLogEventRepository() {
