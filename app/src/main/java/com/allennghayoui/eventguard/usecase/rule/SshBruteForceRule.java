@@ -18,7 +18,7 @@ public class SshBruteForceRule implements Rule {
     @Override
     public boolean matches(LogEvent event) {
         if (!"syslog".equals(event.source())) return false;
-        String message = event.message().toLowerCase();
-        return message.contains("failed password") && message.contains("sshd");
+        if (!"sshd".equals(event.fields().get("program"))) return false;
+        return event.message().toLowerCase().contains("failed password");
     }
 }

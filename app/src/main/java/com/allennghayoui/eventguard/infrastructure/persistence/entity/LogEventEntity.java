@@ -43,7 +43,7 @@ public class LogEventEntity {
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="log_event_fields", joinColumns=@JoinColumn(name="event_id"))
     @MapKeyColumn(name="field_key")
-    @Column(name="field_value", length=2000)
+    @Column(name="field_value", columnDefinition="TEXT")
     private Map<String, String> fields = new HashMap<>();
 
     protected LogEventEntity() {}

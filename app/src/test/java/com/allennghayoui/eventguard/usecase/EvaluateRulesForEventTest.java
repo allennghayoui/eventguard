@@ -32,7 +32,7 @@ public class EvaluateRulesForEventTest {
             "syslog",
             Severity.WARNING,
             "Jan 5 12:34:56 host sshd: Failed password for root from 1.2.3.4",
-            Map.of()
+            Map.of("program", "sshd")
         );
 
         List<Alert> alerts = evaluate.execute(event);

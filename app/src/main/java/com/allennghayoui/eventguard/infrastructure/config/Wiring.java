@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import com.allennghayoui.eventguard.domain.Rule;
 import com.allennghayoui.eventguard.infrastructure.clock.SystemClock;
 import com.allennghayoui.eventguard.infrastructure.notifier.ConsoleAlertNotifier;
-import com.allennghayoui.eventguard.infrastructure.parser.SimpleSyslogParser;
+import com.allennghayoui.eventguard.infrastructure.parser.SyslogParser;
 import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryAlertRepository;
 import com.allennghayoui.eventguard.infrastructure.persistence.InMemoryLogEventRepository;
 import com.allennghayoui.eventguard.usecase.EvaluateRulesForEvent;
@@ -30,7 +30,7 @@ public class Wiring {
 
     @Bean
     public LogParser logParser() {
-        return new SimpleSyslogParser();
+        return new SyslogParser();
     }
     
     @Bean

@@ -75,7 +75,7 @@ public class IngestLogLineTest {
             source,
             Severity.WARNING,
             "sshd: Failed password",
-            Map.of()
+            Map.of("program", "sshd")
         );
 
         IngestLogLine ingest = new IngestLogLine(matchingParser, eventRepository, evaluate);
