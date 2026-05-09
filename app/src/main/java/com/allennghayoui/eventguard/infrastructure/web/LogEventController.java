@@ -2,10 +2,12 @@ package com.allennghayoui.eventguard.infrastructure.web;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -54,6 +56,11 @@ public class LogEventController {
             .toList();
 
         return ResponseEntity.status(HttpStatus.OK).body(body);
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<LogEventResponse> findById(@PathVariable UUID id) {
+        return ResponseEntity.status(HttpStatus.OK).body(LogEventResponse.fromDomain(searchLogEvents.byId(id)));
     }
     
 }
