@@ -76,9 +76,15 @@ public class SyslogParser implements LogParser {
             return LogEvent.create(Instant.now(), source, severity, line, fields);
         }
 
+        String monthAbbreviation = bodyMatcher.group(1);
+        String day = bodyMatcher.group(2);
+        String hour = bodyMatcher.group(3);
+        String minute = bodyMatcher.group(4);
+        String second = bodyMatcher.group(5);
+
         Instant timestamp = parseTimestamp(
-            bodyMatcher.group(1), bodyMatcher.group(2),
-            bodyMatcher.group(2), bodyMatcher.group(4), bodyMatcher.group(5),
+            monthAbbreviation, day,
+            hour, minute, second,
             fields
         );
 
