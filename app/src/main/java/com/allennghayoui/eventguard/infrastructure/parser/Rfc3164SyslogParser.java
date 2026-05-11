@@ -29,7 +29,7 @@ import com.allennghayoui.eventguard.usecase.port.LogParser;
  * to INFO. The system stays useful even when the parser doesn't
  * fully understand a line.
  */
-public class SyslogParser implements LogParser {
+public class Rfc3164SyslogParser implements LogParser {
     private static final Pattern WITH_PRIORITY = Pattern.compile(
         "^<(\\d{1,3})>\\s*(.*)$"
     );

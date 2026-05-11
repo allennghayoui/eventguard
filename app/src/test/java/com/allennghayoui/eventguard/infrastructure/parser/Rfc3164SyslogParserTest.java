@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
 
-public class SyslogParserTest {
-    private final SyslogParser parser = new SyslogParser();
+public class Rfc3164SyslogParserTest {
+    private final Rfc3164SyslogParser parser = new Rfc3164SyslogParser();
 
     @Test
     void parsesRfc3164WithPriority() {
