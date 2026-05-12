@@ -1,0 +1,33 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: eventguard-pg
+    environment:
+      POSTGRES_USER: eventguard
+      POSTGRES_PASSWORD: eventguard
+      POSTGRES_DB: eventguard
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U eventguard -d eventguard"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: eventguard-app
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/eventguard
+      SPRING_DATASOURCE_USERNAME: eventguard
+      SPRING_DATASOURCE_PASSWORD: eventguard
+    ports:
+      - "8080:8080"
+
+volumes:
+  postgres-data:

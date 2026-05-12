@@ -1,0 +1,32 @@
+# Gradle
+.gradle/
+**/build/
+**/.gradle/
+
+# IDE
+.idea/
+.vscode/
+.project
+.classpath
+.settings/
+*.iml
+
+# Git
+.git/
+.gitignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and runtime
+*.log
+*.pid
+
+# Local config
+.env
+.env.local
+
+# Documentation that isn't needed at build time
+*.md
+docs/
