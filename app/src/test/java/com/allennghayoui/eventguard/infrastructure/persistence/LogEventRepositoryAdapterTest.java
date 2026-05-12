@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Import;
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.domain.Severity;
 import com.allennghayoui.eventguard.infrastructure.persistence.jpa.LogEventJpaRepository;
+import com.allennghayoui.eventguard.usecase.port.PaginatedRequest;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = Replace.ANY)
@@ -48,7 +49,9 @@ public class LogEventRepositoryAdapterTest {
         assertThat(found.get().message()).isEqualTo("Failed login");
         assertThat(found.get().fields()).containsEntry("user", "root");
 
-        List<LogEvent> bySource = logEventRepositoryAdapter.findBySource("syslog");
+        PaginatedRequest paginatedRequest = new PaginatedRequest(0,50);
+
+        List<LogEvent> bySource = logEventRepositoryAdapter.findBySource("syslog", paginatedRequest);
         assertThat(bySource).hasSize(1);
     }
 
@@ -62,9 +65,12 @@ public class LogEventRepositoryAdapterTest {
         logEventRepositoryAdapter.save(LogEvent.create(t2, "syslog", Severity.INFO, "second", Map.of()));
         logEventRepositoryAdapter.save(LogEvent.create(t3, "syslog", Severity.INFO, "third", Map.of()));
 
+        PaginatedRequest paginatedRequest = new PaginatedRequest(0,50);
+
         List<LogEvent> found = logEventRepositoryAdapter.findInTimeRange(
             Instant.parse("2025-01-10T00:00:00Z"),
-            Instant.parse("2025-01-20T00:00:00Z")
+            Instant.parse("2025-01-20T00:00:00Z"),
+            paginatedRequest
         );
 
         assertThat(found).hasSize(1);

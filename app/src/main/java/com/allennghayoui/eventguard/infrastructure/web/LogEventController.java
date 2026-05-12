@@ -1,5 +1,6 @@
 package com.allennghayoui.eventguard.infrastructure.web;
 
+import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
@@ -15,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
+import static com.allennghayoui.eventguard.infrastructure.web.InputLimits.MAX_PAGE_SIZE;
+import static com.allennghayoui.eventguard.infrastructure.web.InputLimits.MAX_TIME_RANGE_DAYS;
 import com.allennghayoui.eventguard.infrastructure.web.dto.IngestLogLineRequest;
 import com.allennghayoui.eventguard.infrastructure.web.dto.LogEventResponse;
 import com.allennghayoui.eventguard.usecase.IngestLogLine;
 import com.allennghayoui.eventguard.usecase.SearchLogEvents;
+import com.allennghayoui.eventguard.usecase.port.PaginatedRequest;
 
 import jakarta.validation.Valid;
 
@@ -41,8 +45,19 @@ public class LogEventController {
     }
 
     @GetMapping("/by-source")
-    public ResponseEntity<List<LogEventResponse>> findBySource(@RequestParam String source) {
-        List<LogEventResponse> body = searchLogEvents.bySource(source).stream()
+    public ResponseEntity<List<LogEventResponse>> findBySource(
+        @RequestParam String source,
+        @RequestParam(defaultValue="0") int page,
+        @RequestParam(defaultValue="50") int size
+    ) {
+        if (size > MAX_PAGE_SIZE) {
+            throw new IllegalArgumentException("size must be <= " + MAX_PAGE_SIZE
+            );
+        }
+
+        PaginatedRequest paginatedRequest = new PaginatedRequest(page, size);
+
+        List<LogEventResponse> body = searchLogEvents.bySource(source, paginatedRequest).stream()
             .map(LogEventResponse::fromDomain)
             .toList();
 
@@ -50,8 +65,28 @@ public class LogEventController {
     }
 
     @GetMapping("/by-time")
-    public ResponseEntity<List<LogEventResponse>> findInTimeRange(@RequestParam Instant from, @RequestParam Instant to) {
-        List<LogEventResponse> body = searchLogEvents.inTimeRange(from, to).stream()
+    public ResponseEntity<List<LogEventResponse>> findInTimeRange(
+        @RequestParam Instant from,
+        @RequestParam Instant to,
+        @RequestParam(defaultValue = "0") int page,
+        @RequestParam(defaultValue = "50") int size 
+    ) {
+        long days = Duration.between(from, to).toDays();
+        if (days > MAX_TIME_RANGE_DAYS) {
+            throw new IllegalArgumentException(
+                "time range exceeds " + MAX_TIME_RANGE_DAYS + " days"
+            );
+        }
+
+        if (size > MAX_PAGE_SIZE) {
+            throw new IllegalArgumentException(
+                "size must be <= " + MAX_PAGE_SIZE
+            );
+        }
+
+        PaginatedRequest paginatedRequest = new PaginatedRequest(page, size);
+
+        List<LogEventResponse> body = searchLogEvents.inTimeRange(from, to, paginatedRequest).stream()
             .map(LogEventResponse::fromDomain)
             .toList();
 

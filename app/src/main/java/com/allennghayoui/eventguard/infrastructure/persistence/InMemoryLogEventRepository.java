@@ -9,6 +9,7 @@ import java.util.UUID;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
+import com.allennghayoui.eventguard.usecase.port.PaginatedRequest;
 
 public class InMemoryLogEventRepository implements LogEventRepository {
     private final Map<UUID, LogEvent> store = new HashMap<>();
@@ -24,16 +25,20 @@ public class InMemoryLogEventRepository implements LogEventRepository {
     }
 
     @Override
-    public List<LogEvent> findBySource(String source) {
+    public List<LogEvent> findBySource(String source, PaginatedRequest page) {
         return store.values().stream()
             .filter(event -> event.source().equals(source))
+            .skip((long) page.page() * page.size())
+            .limit(page.size())
             .toList();
     }
 
     @Override
-    public List<LogEvent> findInTimeRange(Instant from, Instant to) {
+    public List<LogEvent> findInTimeRange(Instant from, Instant to, PaginatedRequest page) {
         return store.values().stream()
             .filter(event -> !event.timestamp().isBefore(from) && !event.timestamp().isAfter(to))
+            .skip((long) page.page() * page.size())
+            .limit(page.size())
             .toList();
     }
 

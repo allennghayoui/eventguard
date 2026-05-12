@@ -10,6 +10,7 @@ import com.allennghayoui.eventguard.domain.LogEvent;
 public interface LogEventRepository {
     void save(LogEvent event);
     Optional<LogEvent> findById(UUID id);
-    List<LogEvent> findBySource(String source);
-    List<LogEvent> findInTimeRange(Instant from, Instant to);
+    List<LogEvent> findBySource(String source, PaginatedRequest page);
+    List<LogEvent> findInTimeRange(Instant from, Instant to, PaginatedRequest page);
+
 }

@@ -7,12 +7,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.context.annotation.Profile;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
 
 import com.allennghayoui.eventguard.domain.LogEvent;
 import com.allennghayoui.eventguard.infrastructure.persistence.entity.LogEventEntity;
 import com.allennghayoui.eventguard.infrastructure.persistence.jpa.LogEventJpaRepository;
 import com.allennghayoui.eventguard.usecase.port.LogEventRepository;
+import com.allennghayoui.eventguard.usecase.port.PaginatedRequest;
 
 @Repository
 @Profile("!dev")
@@ -34,15 +36,19 @@ public class LogEventRepositoryAdapter implements LogEventRepository {
     }
 
     @Override
-    public List<LogEvent> findBySource(String source) {
-        return jpa.findBySource(source).stream()
+    public List<LogEvent> findBySource(String source, PaginatedRequest page) {
+        PageRequest springPageRequest = PageRequest.of(page.page(), page.size());
+
+        return jpa.findBySource(source, springPageRequest).stream()
             .map(LogEventEntity::toDomain)
             .toList();
     }
 
     @Override
-    public List<LogEvent> findInTimeRange(Instant from, Instant to) {
-        return jpa.findByTimestampBetween(from, to).stream()
+    public List<LogEvent> findInTimeRange(Instant from, Instant to,PaginatedRequest page) {
+        PageRequest springPageRequest = PageRequest.of(page.page(), page.size());
+
+        return jpa.findByTimestampBetween(from, to, springPageRequest).stream()
             .map(LogEventEntity::toDomain)
             .toList();
     }
