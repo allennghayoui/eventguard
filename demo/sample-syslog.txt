@@ -1,0 +1,15 @@
+<38>Jan 15 09:14:23 web-server-01 sshd[3421]: Accepted publickey for alice from 10.0.1.50 port 41324 ssh2
+<38>Jan 15 09:14:25 web-server-01 sshd[3421]: pam_unix(sshd:session): session opened for user alice by (uid=0)
+<86>Jan 15 09:15:12 web-server-02 systemd[1]: Started Session 142 of user deploy
+<86>Jan 15 09:18:44 db-server-01 postgresql[8821]: connection authorized: user=app database=prod
+<38>Jan 15 09:22:01 web-server-01 sshd[3502]: Accepted password for bob from 10.0.1.51 port 41501 ssh2
+<86>Jan 15 09:25:30 web-server-01 cron[942]: pam_unix(cron:session): session opened for user root by (uid=0)
+<86>Jan 15 09:31:18 web-server-01 systemd[1]: Started Daily backup
+<38>Jan 15 10:02:14 web-server-03 sshd[7821]: Failed password for root from 198.51.100.42 port 56712 ssh2
+<38>Jan 15 10:02:17 web-server-03 sshd[7821]: Failed password for root from 198.51.100.42 port 56712 ssh2
+<38>Jan 15 10:02:21 web-server-03 sshd[7821]: Failed password for root from 198.51.100.42 port 56712 ssh2
+<38>Jan 15 10:02:25 web-server-03 sshd[7821]: Failed password for admin from 198.51.100.42 port 56712 ssh2
+<38>Jan 15 10:02:29 web-server-03 sshd[7821]: Failed password for root from 198.51.100.42 port 56712 ssh2
+<86>Jan 15 10:05:00 web-server-02 nginx[1240]: 10.0.1.50 - - [15/Jan/2025:10:05:00 +0000] "GET /api/health HTTP/1.1" 200 47
+<86>Jan 15 10:08:32 web-server-01 systemd[1]: Stopping backup service
+<38>Jan 15 10:15:43 db-server-01 sshd[9921]: Failed password for postgres from 203.0.113.17 port 22341 ssh2
